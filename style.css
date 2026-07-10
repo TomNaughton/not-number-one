@@ -466,3 +466,13 @@ button:active {
     box-shadow: none;
     transform: translateY(-2px);
 }
+
+/* Fix mobile date input overflow */
+#statusDate {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box; /* This forces padding to be included in the width */
+    display: block;         /* Ensures it behaves like a block element */
+    padding: 12px;
+    font-size: 1rem;        /* Prevent iOS from auto-zooming on focus */
+}
