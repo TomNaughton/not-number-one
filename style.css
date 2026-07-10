@@ -1,0 +1,468 @@
+/* =========================================
+   1. PLAYFUL FONTS & CSS RESET
+   ========================================= */
+/* Importing Nunito: A rounded, friendly, modern font */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* =========================================
+   2. TRENDY APP VARIABLES
+   ========================================= */
+:root {
+    /* A soft, vibrant background gradient (Blue to Lilac) */
+    --bg-gradient: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+    
+    /* Text Colors */
+    --text-main: #2d3748;        
+    --text-muted: #718096;       
+    
+    /* Button Gradients */
+    --btn-main: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --btn-main-hover: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    
+    --btn-buy: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    --btn-buy-hover: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+    
+    /* Extremely rounded, friendly corners */
+    --radius-card: 24px; 
+    --radius-input: 14px;
+}
+
+/* =========================================
+   3. STRUCTURE & TYPOGRAPHY
+   ========================================= */
+body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    /* Glassmorphism effect: White with 90% opacity and a backdrop blur */
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    padding: 45px 35px;
+    border-radius: var(--radius-card);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.6); /* Subtle inner highlight */
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #1a202c;
+    margin-bottom: 10px;
+    letter-spacing: -0.03em;
+}
+
+p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+/* =========================================
+   4. FRIENDLY FORM ELEMENTS
+   ========================================= */
+label {
+    display: block;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    margin-left: 4px; /* Slight indent so it aligns with the rounded input */
+}
+
+select, input[type="datetime-local"] {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 25px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-input);
+    background-color: #f7fafc;
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Soft, colorful focus state */
+select:focus, input[type="datetime-local"]:focus {
+    outline: none;
+    border-color: #a18cd1;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(161, 140, 209, 0.2);
+    transform: translateY(-2px);
+}
+
+button {
+    background: var(--btn-main);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: var(--radius-input);
+    font-size: 1.1rem;
+    font-weight: 800;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 10px 15px -3px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: var(--btn-main-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 20px -3px rgba(102, 126, 234, 0.5);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 5px 10px -3px rgba(102, 126, 234, 0.4);
+}
+
+/* Target the main Crunch button and the Mug button */
+#calcButton, .mug-btn {
+    /* Keep your existing gradient here */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+    
+    /* Tell the browser to animate the lift, shadow, and brightness smoothly */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+#calcButton:hover, .mug-btn:hover {
+    /* Keep the background EXACTLY the same so it doesn't snap */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    /* Lift it up slightly */
+    transform: translateY(-2px);
+    
+    /* Add a soft glowing shadow underneath */
+    box-shadow: 0 8px 20px -8px rgba(102, 126, 234, 0.8);
+    
+    /* Smoothly turn up the brightness by 10% */
+    filter: brightness(1.1); 
+}
+
+/* =========================================
+   5. RESULTS AREA & FOOTER
+   ========================================= */
+#resultArea {
+    margin-top: 35px;
+    padding-top: 30px;
+    border-top: 2px dashed #cbd5e0;
+    animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* A fun, bouncy entrance animation instead of a boring fade */
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+#rankingDisplay {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #1a202c;
+    margin-bottom: 25px;
+}
+
+/* Style the span where the numbers roll */
+#numberAnim {
+    background: var(--btn-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mug-btn {
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%); /* A vibrant Emerald Green */
+    /* Ensure the padding and font settings inherit nicely from the base button above */
+}
+
+.mug-btn:hover {
+    /* Keep the background identical to prevent the ugly color snap */
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+    
+    transform: translateY(-2px);
+    
+    /* A matching green glow for the shadow */
+    box-shadow: 0 8px 20px -8px rgba(16, 185, 129, 0.8); 
+    
+    filter: brightness(1.1); /* Smoothly brightens the green */
+}
+
+.footer {
+    margin-top: 35px;
+}
+
+.footer a {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 800;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: #764ba2;
+}
+
+/* =========================================
+   6. ANIMATIONS
+   ========================================= */
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(56, 239, 125, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(56, 239, 125, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(56, 239, 125, 0);
+    }
+}
+
+/* =========================================
+   7. MODAL (POPUP) STYLES
+   ========================================= */
+/* The dark overlay behind the popup */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.6); /* Slate gray with opacity */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    
+    /* Center the box */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: var(--radius-card);
+    max-width: 400px;
+    width: 90%;
+    text-align: left;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    /* A quick scale-up animation for the popup */
+    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes modalPop {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-content h3 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #1a202c;
+    margin-bottom: 12px;
+}
+
+.modal-content p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* The 'X' to close the modal */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #a0aec0;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #2d3748;
+    text-decoration: none;
+}
+
+/* =========================================
+   8. FOOTER & HEADER REFINEMENTS
+   ========================================= */
+.footer {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allows the links to drop to the next line if needed */
+    gap: 10px 15px;  /* 10px vertical gap, 15px horizontal gap */
+}
+
+.divider {
+    color: #cbd5e0;
+    font-size: 0.8rem;
+}
+
+/* On small mobile screens, stack the links vertically and hide the dots */
+@media (max-width: 400px) {
+    .footer {
+        flex-direction: column; /* Stacks items top-to-bottom */
+        gap: 12px;
+    }
+    .divider {
+        display: none; /* Hides the bullet points so it looks like a clean menu */
+    }
+}
+
+.why-link {
+    cursor: pointer;
+}
+
+/* =========================================
+   9. METHODOLOGY MATH BOX
+   ========================================= */
+.math-box {
+    background: #f1f5f9;
+    border-left: 4px solid #667eea;
+    padding: 12px 15px;
+    margin-top: 15px;
+    font-family: 'Courier New', Courier, monospace; /* Monospace for that data feel */
+    font-weight: 800;
+    color: #4a5568;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   10. LOADING SEQUENCE
+   ========================================= */
+#loadingArea {
+    margin-top: 30px;
+    padding-top: 20px;
+}
+
+#loadingText {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: #667eea;
+    font-weight: 700;
+    margin-top: 15px;
+    height: 20px; /* Keeps the UI from jumping when text changes */
+}
+
+/* A sleek, modern spinning ring */
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    border: 4px solid rgba(102, 126, 234, 0.2);
+    border-radius: 50%;
+    border-top-color: #667eea;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* =========================================
+   11. METHODOLOGY SOURCES
+   ========================================= */
+.modal-content.scrollable {
+    max-height: 85vh; /* Prevents the modal from being taller than the screen */
+    overflow-y: auto; /* Adds a scrollbar if the content overflows */
+}
+
+.source-list {
+    margin: 20px 0;
+    padding-left: 20px; /* Indents the bullet points */
+    text-align: left;
+}
+
+.source-list li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.source-list strong {
+    color: #2d3748;
+}
+
+/* Make the academic links look clickable and distinct */
+.source-list a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.source-list a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* =========================================
+   12. RESULTS ADDITIONS (SHARE BUTTON)
+   ========================================= */
+   
+/* Force the link wrapper to behave like a block so it respects spacing */
+#mugLink {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 20px; /* Adds a clean gap below the mug button */
+}
+
+.share-btn {
+    background: transparent;
+    color: var(--text-main);
+    border: 2px solid #cbd5e0;
+    box-shadow: none;
+    /* Optional: making the font a tiny bit smaller helps establish it as the secondary action */
+    font-size: 1rem; 
+    padding: 16px;
+}
+
+.share-btn:hover {
+    background: #edf2f7;
+    border-color: #a0aec0;
+    box-shadow: none;
+    transform: translateY(-2px);
+}

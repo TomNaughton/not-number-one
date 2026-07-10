@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph Meta Tags for beautiful link sharing -->
+    <meta property="og:title" content="The Historical Reality Check" />
+    <meta property="og:description" content="Every '#1 Dad' mug is a statistical lie. Find your actual place in line." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.yourdomain.com/" />
+    
+    <!-- This is the image that will show up in the text message preview! -->
+    <!-- You will replace this URL with an actual image of your mug once the site is live -->
+    <meta property="og:image" content="https://www.yourdomain.com/preview-image.jpg" />
+
+    <title>The Historical Reality Check</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Not Number One</h1>
+        <p class="subtitle">Every "#1" mug is a statistical lie. We crunched the demographic data to find your actual place in line.</p>
+        
+        <label for="roleSelect">Who are we auditing?</label>
+        <select id="roleSelect">
+            <option value="dad">Dad</option>
+            <option value="mum">Mum</option>
+            <option value="nan">Nan</option>
+            <option value="grandad">Grandad</option>
+            <option value="greatnan">Great-Nan</option>
+            <option value="greatgrandad">Great-Grandad</option>
+            <option value="auntie">Auntie</option>
+            <option value="uncle">Uncle</option>
+            <option value="stepdad">Step-Dad</option>
+            <option value="stepmum">Step-Mum</option>
+            <option value="catmum">Cat Mum</option>
+            <option value="catdad">Cat Dad</option>
+            <option value="dogmum">Dog Mum</option>
+            <option value="dogdad">Dog Dad</option>
+        </select>
+
+        <label for="statusDate">Exact time the title was claimed:</label>
+        <input type="datetime-local" id="statusDate" min="1900-01-01T00:00">
+        
+        <button id="calcButton" onclick="startCalculation()">Crunch the Numbers</button>
+
+        <div id="loadingArea" style="display:none;">
+            <div class="spinner"></div>
+            <p id="loadingText">Initiating demographic audit...</p>
+        </div>
+
+        <div id="resultArea" style="display:none;">
+            <h2 id="rankingDisplay"></h2>
+            
+            <a id="mugLink" href="#" target="_blank">
+                <button class="mug-btn">Get the Statistically Accurate Mug</button>
+            </a>
+            
+            <!-- The Native Share Button -->
+            <!-- The SVG is the standard 'share nodes' icon people recognize -->
+            <button class="share-btn" onclick="shareResult()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+                Share My Rank
+            </button>
+        </div>
+
+        <div class="footer">
+            <a href="#" onclick="openModal('aboutModal', event)" class="why-link">Why does this exist?</a>
+            <span class="divider">•</span>
+            <a href="#" onclick="openModal('mathModal', event)" class="why-link">Methodology</a>
+            <span class="divider">•</span>
+            <a href="https://ko-fi.com/tomnaughton" target="_blank">☕ Tip Jar</a>
+        </div>
+    </div>
+
+    <!-- Modal 1: The About Section -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
+            <h3>Because maths.</h3>
+            <p>Walking past a shop display full of "#1" merchandise is mathematically infuriating. Whether you need a brutally honest gift for a new parent, or you're just looking to finally knock your father-in-law down a peg with a highly accurate piece of ceramic, we've got you covered.</p>
+        </div>
+    </div>
+
+    <!-- Modal 2: The Cited Methodology -->
+    <div id="mathModal" class="modal">
+        <div class="modal-content scrollable">
+            <span class="close-btn" onclick="closeModal('mathModal')">&times;</span>
+            <h3>The Methodology</h3>
+            <p>We do not just make these numbers up. We take this joke very seriously. Our baselines are aggregated from the following authoritative demographic datasets:</p>
+            
+            <ul class="source-list">
+                <li><strong>Parents & Grandparents:</strong> Base models derived from the <a href="https://www.prb.org/articles/how-many-people-have-ever-lived-on-earth/" target="_blank">Population Reference Bureau's</a> estimate of 117 billion modern humans born since 190,000 B.C.E., adjusted for historical 50% childhood mortality and reproductive variance.</li>
+                <li><strong>Extended Lineage:</strong> Multipliers calculated using historical sibling survival matrixes and kinship models from the <a href="https://www.demogr.mpg.de/en/" target="_blank">Max Planck Institute for Demographic Research</a>.</li>
+                <li><strong>Blended Families:</strong> Factoring in 18th and 19th-century widowhood/remarriage rates, cross-referenced with modern <a href="https://www.pewresearch.org/social-trends/2015/12/17/1-the-american-family-today/" target="_blank">Pew Research</a> blended family tracking.</li>
+                <li><strong>Pet Parents:</strong> Domestication milestones cross-referenced with companion animal statistics from <a href="https://www.ukpetfood.org/information-centre/statistics.html" target="_blank">UK Pet Food</a> and historical feline/canine population estimates.</li>
+            </ul>
+
+            <div class="math-box">
+                Rank = B₁₉₀₀ + ∑ [ y = 1900 → target_year ] ( G_y × λ ) + F
+                <br><br>
+                <span style="font-size: 0.75rem; color: #718096; font-weight: 500;">
+                B₁₉₀₀ = Pre-calculated historical base up to 1900<br>
+                G_y = Global demographic birth volume for year <i>y</i><br>
+                λ = Role-specific minting probability<br>
+                F = Fractional completion of the target year<br><br>
+                *Note: Post-1900 demographic curve integration utilizes interpolated data points anchored by UN decadal census estimates.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
