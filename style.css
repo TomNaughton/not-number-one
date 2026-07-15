@@ -467,12 +467,23 @@ button:active {
     transform: translateY(-2px);
 }
 
-/* Fix mobile date input overflow */
+/* Fix mobile date input overflow (iOS Safari override) */
 #statusDate {
     width: 100%;
     max-width: 100%;
-    box-sizing: border-box; /* This forces padding to be included in the width */
-    display: block;         /* Ensures it behaves like a block element */
-    padding: 12px;
-    font-size: 1rem;        /* Prevent iOS from auto-zooming on focus */
+    min-width: 0; /* Prevents the container from stretching */
+    box-sizing: border-box; 
+    display: block;
+    padding: 12px 10px; /* Slightly reduced horizontal padding */
+    font-size: 1rem;    /* Prevents auto-zoom */
+    
+    /* The magic lines to strip Apple's forced dimensions */
+    -webkit-appearance: none; 
+    appearance: none;
+    
+    /* Because we stripped the appearance, we must re-declare the background and border */
+    background-color: #ffffff;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px; /* Matches your other inputs */
+    color: var(--text-main);
 }
