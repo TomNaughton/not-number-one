@@ -78,8 +78,34 @@ window.onload = function() {
     const maxDateString = now.toISOString().slice(0, 16);
     
     dateInput.max = maxDateString;
-    dateInput.value = maxDateString;
+    
+    setInitialDateTime();
 };
+
+// =========================================
+// SET DEFAULT DATE AND TIME (BULLETPROOF)
+// =========================================
+function setInitialDateTime() {
+    const dateInput = document.getElementById('statusDate');
+    if (!dateInput) return;
+
+    const now = new Date();
+    
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+    // Assemble in the strict YYYY-MM-DDThh:mm format required by type="datetime-local"
+    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+    
+    // 1. Set the JavaScript property
+    dateInput.value = formattedDateTime;
+    
+    // 2. Set the HTML attribute (forces iOS Safari to register the change visually)
+    dateInput.setAttribute('value', formattedDateTime);
+}
 
 // =========================================
 // 3. THE INTEGRATION LOOP
