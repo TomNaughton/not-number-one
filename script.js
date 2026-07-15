@@ -78,6 +78,7 @@ window.onload = function() {
     const maxDateString = now.toISOString().slice(0, 16);
     
     dateInput.max = maxDateString;
+    dateInput.value = maxDateString;
 };
 
 // =========================================
